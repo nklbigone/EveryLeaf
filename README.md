@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+Users             |Tasks
+------------      | -------------
+user_id-integer   | task_id-integer
+First_name-string | Title-string
+Last_name-string  | TaskName-string
+UserName-string   | user_id-integer
+Password-string   | TimeStamp-timestamp
+TimeStamp-timestamp|
