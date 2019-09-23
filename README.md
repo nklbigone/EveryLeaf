@@ -23,11 +23,20 @@ Things you may want to cover:
 
 * ...
 
-Users             |Tasks
-------------      | -------------
-user_id-integer   | task_id-integer
-First_name-string | Title-string
-Last_name-string  | TaskName-string
-UserName-string   | user_id-integer
-Password-string   | TimeStamp-timestamp
-TimeStamp-timestamp|
+Users        |Data Type
+-----------| ----------
+user_id    | integer
+First_name | string
+Last_name  | string
+UserName   | integer
+Password   | string 
+TimeStamp  |timestamp|
+
+
+Task     |Data Type
+---------| --------
+task_id  | integer
+Title    | string
+TaskName | string
+user_id  | integer
+TimeStamp| timestamp
