@@ -15,16 +15,22 @@ RSpec.feature "Task management function", type: :feature do
     # write a test to verify that the string "" testtesttest "" samplesample "is included when accessing the task list page using have_content method
     save_and_open_page
 
-    expect(page).to have_content 'Ndikumana'
-    expect(page).to have_content 'Alexis'
+    expect(page).to have_content 'testtesttest'
+    expect(page).to have_content 'samplesample'
   end
-
-
   scenario "Test task creation" do
-
+    visit new_task_path
+    fill_in 'Title', with: 'greeting'
+    click_button '登録する'
+    visit tasks_path
+    expect(page).to have_content 'greeting'
   end
-
   scenario "Test task details" do
-
+    Task.create!(title: 'fine', task_name: 'hello' , user_id: '1')
+    visit tasks_path
+    click_link 'Show'
+    expect(page).to have_content 'fine'
+    expect(page).to have_content 'hello'
+    expect(page).to have_content '1'
   end
 end
