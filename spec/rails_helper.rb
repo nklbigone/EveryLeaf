@@ -61,6 +61,9 @@ RSpec.configure do |config|
   RSpec.configure do |config|
   
     config.filter_rails_from_backtrace!
+    config.mock_with :rspec do |mocks|
+      mocks.syntax = [:should, :receive]
+    end
     # arbitrary gems may also be filtered via:
     # config.filter_gems_from_backtrace("gem name")
   
@@ -76,5 +79,6 @@ RSpec.configure do |config|
     config.after(:all) do
       DatabaseCleaner.clean
     end
+
   end
 end
