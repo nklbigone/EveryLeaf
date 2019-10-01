@@ -15,3 +15,9 @@ Title    | string
 TaskName | string
 user_id  | integer
 TimeStamp| timestamp
+
+
+git add -A
+git commit -m "init"
+git push heroku master
+heroku run rake db:migrate
