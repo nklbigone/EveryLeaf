@@ -33,4 +33,11 @@ RSpec.feature "Task management function", type: :feature do
   scenario "Test whether tasks are arranged in descending order of creation date" do
     Task.all.order('created_at DESC').all.should ==  Task.order('created_at DESC')
     end
+    scenario "Test if tasks are ordered by deadline" do
+      visit tasks_path
+      click_button 'Sort by deadline'
+      save_and_open_page
+      assert Task.all.order('deadline desc')
+      
+    end
 end

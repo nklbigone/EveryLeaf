@@ -9,6 +9,7 @@
       <th>Title</th>
       <th>Task</th>
       <th>User</th>
+      <th>Deadline</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,11 +20,15 @@
         <td><%= task.title %></td>
         <td><%= task.task_name %></td>
         <td><%= task.user_id %></td>
+        <td><%= task.deadline %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+    <button>
+          <%= link_to 'Sort by deadline', tasks_path(sorting_deadline: 'true') %>
+        </button>
   </tbody>
 </table>
 
