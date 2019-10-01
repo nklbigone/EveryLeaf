@@ -15,6 +15,3 @@ Title    | string
 TaskName | string
 user_id  | integer
 TimeStamp| timestamp
-
-
-
