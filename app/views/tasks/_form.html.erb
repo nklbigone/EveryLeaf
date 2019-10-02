@@ -22,6 +22,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :Status %>
+    <%= form.select :status, ['Not started', 'In progress', 'Done'] %>
+  </div>
+
+  <div class="field">
     <%= form.label :user_id %>
     <%= form.number_field :user_id %>
   </div>

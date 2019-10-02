@@ -2,10 +2,10 @@
 require 'rails_helper'
 RSpec.feature "Task management function", type: :feature do
   background do
-    FactoryBot.create(:task, title: 'title 1', task_name: 'task 1', user_id: '2')
-    FactoryBot.create(:task, title: 'title 2', task_name: 'task 2', user_id: '5')
-    FactoryBot.create(:task, title: 'title 3', task_name: 'task 3', user_id: '1')
-    FactoryBot.create(:second_task, title: 'title second', task_name: 'task second', user_id: '10')
+    FactoryBot.create(:task, title: 'title 1', task_name: 'task 1', status: 'Not started', user_id: '2')
+    FactoryBot.create(:task, title: 'title 2', task_name: 'task 2', status: 'In progress', user_id: '5')
+    FactoryBot.create(:task, title: 'title 3', task_name: 'task 3', status: 'Done', user_id: '1')
+    FactoryBot.create(:second_task, title: 'title second', task_name: 'task second', status: 'Done', user_id: '10')
   end
 
   scenario "Test task list" do
@@ -33,11 +33,34 @@ RSpec.feature "Task management function", type: :feature do
   end
   scenario "Test whether tasks are arranged in descending order of creation date" do
     Task.all.order('created_at DESC').all.should ==  Task.order('created_at DESC')
-    end
-    scenario "Test if tasks are ordered by deadline" do
-      visit tasks_path
-      click_button 'Sort by deadline'
-      save_and_open_page
-      assert Task.all.order('deadline DESC')
-    end
+  end
+  scenario "Test if tasks are ordered by deadline" do
+    visit tasks_path
+    click_button 'Sort by deadline'
+    save_and_open_page
+    assert Task.all.order('deadline DESC')
+  end
+
+  scenario "Test search by title" do
+    visit tasks_path
+    fill_in 'title', with: 'title 1'
+    click_button 'search'
+    expect(page).to have_content 'title 1'
+  end
+
+  scenario "Test search by status" do
+    visit tasks_path
+    fill_in 'status', with: 'In progress'
+    click_button 'search'
+    expect(page).to have_content 'In progress'
+  end
+
+  scenario "Test search by both status and title" do
+    visit tasks_path
+    fill_in 'title', with: 'title 3'
+    fill_in 'status', with: 'Done'
+    click_button 'search'
+    expect(page).to have_content 'title 3'
+    expect(page).to have_content 'Done'
+  end
 end
