@@ -19,6 +19,7 @@ RSpec.feature "Task management function", type: :feature do
   scenario "Test task creation" do
     visit new_task_path
     fill_in 'Title', with: 'greeting'
+    fill_in 'Task name', with: 'hello'
     click_button '登録する'
     visit tasks_path
     expect(page).to have_content 'greeting'
@@ -37,7 +38,6 @@ RSpec.feature "Task management function", type: :feature do
       visit tasks_path
       click_button 'Sort by deadline'
       save_and_open_page
-      assert Task.all.order('deadline desc')
-      
+      assert Task.all.order('deadline DESC')
     end
 end
