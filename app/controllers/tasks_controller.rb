@@ -2,7 +2,10 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
-      if params[:sorting_deadline]
+      @search = Task.ransack(params[:q])
+      if params[:q]
+        @tasks = @search.result
+      elsif params[:sorting_deadline]
         @tasks = Task.all.order('deadline DESC')
       else
         @tasks = Task.all.order('created_at DESC')
@@ -62,6 +65,6 @@ class TasksController < ApplicationController
       end
       
       def task_params
-        params.require(:task).permit(:title, :task_name, :user_id, :deadline)
+        params.require(:task).permit(:title, :task_name, :status, :deadline, :user_id, :deadline)
       end
 end

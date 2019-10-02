@@ -67,3 +67,4 @@ gem "rspec-rails"
   gem 'faker'
   gem "database_cleaner"
   gem "launchy"
+  gem "ransack"
