@@ -63,4 +63,9 @@ RSpec.feature "Task management function", type: :feature do
     expect(page).to have_content 'title 3'
     expect(page).to have_content 'Done'
   end
+  scenario "Test sort by priority" do
+    visit tasks_path
+    click_button 'Sort by deadline'
+    assert Task.all.order('priority desc')
+  end
 end

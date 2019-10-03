@@ -32,6 +32,13 @@
   </div>
 
   <div class="field">
+    <%= form.label :priority %>
+    <%= form.radio_button :priority, 'low'%>Low 
+    <%= form.radio_button :priority, 'medium'%>Medium 
+    <%= form.radio_button :priority, 'high'%>High 
+  </div>
+
+  <div class="field">
   <%= form.label :deadline %>
   <%= form.date_field :deadline %>
 </div>
