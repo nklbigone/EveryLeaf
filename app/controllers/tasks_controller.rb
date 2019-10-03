@@ -7,6 +7,8 @@ class TasksController < ApplicationController
         @tasks = @search.result
       elsif params[:sorting_deadline]
         @tasks = Task.all.order('deadline DESC')
+      elsif params[:sorting_priority]
+        @tasks = Task.all.order('priority DESC')
       else
         @tasks = Task.all.order('created_at DESC')
       end
@@ -65,6 +67,6 @@ class TasksController < ApplicationController
       end
       
       def task_params
-        params.require(:task).permit(:title, :task_name, :status, :deadline, :user_id, :deadline)
+        params.require(:task).permit(:title, :task_name, :status, :priority, :user_id, :deadline)
       end
 end
