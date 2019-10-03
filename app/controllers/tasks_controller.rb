@@ -2,15 +2,16 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
+      @tasks = Task.all.order('title').page(params[:page])
       @search = Task.ransack(params[:q])
       if params[:q]
         @tasks = @search.result
       elsif params[:sorting_deadline]
-        @tasks = Task.all.order('deadline DESC')
+        @tasks = Task.all.order('deadline DESC').page(params[:page])
       elsif params[:sorting_priority]
-        @tasks = Task.all.order('priority DESC')
+        @tasks = Task.all.order('priority DESC').page(params[:page])
       else
-        @tasks = Task.all.order('created_at DESC')
+        @tasks = Task.all.order('created_at DESC').page(params[:page])
       end
     end
   
