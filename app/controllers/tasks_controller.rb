@@ -5,7 +5,7 @@ class TasksController < ApplicationController
       @tasks = Task.all.order('title').page(params[:page])
       @search = Task.ransack(params[:q])
       if params[:q]
-        @tasks = @search.result
+        @tasks = @search.result.page(params[:page])
       elsif params[:sorting_deadline]
         @tasks = Task.all.order('deadline DESC').page(params[:page])
       elsif params[:sorting_priority]
