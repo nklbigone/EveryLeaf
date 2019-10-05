@@ -1,13 +1,14 @@
+<div style="margin-left: 20%; margin-right: 20%; background-color: #a1d1e0;">
 <%= t('view.sample') %>
 <p id="notice"><%= notice %></p>
 
 <h1>Tasks</h1>
 <%= search_form_for @search do |f| %>
   <div class="field">
-<%= f.label :title_cont ,"search by title" %>
-<%= f.text_field :title_cont %>
-<%= f.label :status_cont ,"search by status" %>
-<%= f.text_field :status_cont %>
+<%= f.label :title_cont ,"search by title" %><br>
+<%= f.text_field :title_cont %><br>
+<%= f.label :status_cont ,"search by status" %><br>
+<%= f.text_field :status_cont %><br>
 </div>
 <div class="actions"><%= f.submit "search"%></div>
   <% end %>
@@ -40,16 +41,20 @@
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-    <button>
+    <hr>
+    <button class="btn btn-primary">
           <%= link_to 'Sort by deadline', tasks_path(sorting_deadline: 'true') %>
     </button>
     <button>
           <%= link_to 'Sort by priority', tasks_path(sorting_priority: 'true') %>
     </button>
+    
   </tbody>
 </table>
+<hr>
 
 <br>
 
 <%= link_to 'New Task', new_task_path %>
 <%= paginate @tasks %>
+</div>

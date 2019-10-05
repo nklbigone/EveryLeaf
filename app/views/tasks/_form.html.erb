@@ -1,3 +1,4 @@
+<div style="margin-left: 20%; margin-right: 20%; background-color: #a1d1e0;">
 <%= form_with(model: task, local: true) do |form| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
@@ -34,7 +35,7 @@
   <div class="field">
     <%= form.label :priority %>
     <%= form.radio_button :priority, 'low'%>Low 
-    <%= form.radio_button :priority, 'medium'%>Medium 
+    <%= form.radio_button :priority, 'medium'%>Medium
     <%= form.radio_button :priority, 'high'%>High 
   </div>
 
@@ -47,3 +48,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>
