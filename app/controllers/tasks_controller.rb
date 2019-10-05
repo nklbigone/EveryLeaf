@@ -2,7 +2,6 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
-      @tasks = Task.all.order('title').page(params[:page])
       @search = Task.ransack(params[:q])
       if params[:q]
         @tasks = @search.result.page(params[:page])
