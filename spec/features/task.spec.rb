@@ -65,7 +65,7 @@ RSpec.feature "Task management function", type: :feature do
   end
   scenario "Test sort by priority" do
     visit tasks_path
-    click_button 'Sort by deadline'
+    click_button 'Sort by priority'
     assert Task.all.order('priority desc')
   end
 end
