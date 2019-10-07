@@ -1,18 +1,22 @@
-<div style="margin-left: 20%; margin-right: 20%; background-color: #a1d1e0;">
+<div style="margin-left: 15%; margin-right: 15%; background-color: AZURE;">
 <%= t('view.sample') %>
 <p id="notice"><%= notice %></p>
-
-<h1>Tasks</h1>
 <%= search_form_for @search do |f| %>
   <div class="field">
-<%= f.label :title_cont ,"search by title" %><br>
-<%= f.text_field :title_cont %><br>
-<%= f.label :status_cont ,"search by status" %><br>
-<%= f.text_field :status_cont %><br>
+<h1>Tasks</h1>
+<table class="table table-AZURE">
+  <thead>
+    <tr>
+      <th><%= f.label :title_cont ,"Search by title"%><br></th>
+      <th><%= f.text_field :title_cont %><br></th>
+      <th><%= f.label :status_cont ,"Search by status" %><br></th>
+      <th><%= f.text_field :status_cont %><br></th>
+      <th><div class="actions"><%= f.submit "Search", class: 'btn btn-info'%></div> <% end %></th>
+    </tr>
+  </thead>
+  </table>
 </div>
-<div class="actions"><%= f.submit "search"%></div>
-  <% end %>
-<table>
+<table class="table table-AZURE">
   <thead>
     <tr>
       <th>Title</th>
@@ -36,18 +40,23 @@
         <td><%= task.priority %></td>
         <td><%= task.deadline %></td>
         <td><%= task.created_at %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', task, class: 'btn btn-success btn btn-sm' %></td>
+        <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-primary btn btn-sm' %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn btn-sm' %></td>
       </tr>
-    <% end %>
-    <hr>
-    <button class="btn btn-primary">
-          <%= link_to 'Sort by deadline', tasks_path(sorting_deadline: 'true') %>
-    </button>
-    <button>
-          <%= link_to 'Sort by priority', tasks_path(sorting_priority: 'true') %>
-    </button>
+      <% end %>
+      <tr>
+      <td><%= link_to 'New Task', new_task_path %>
+          <%= paginate @tasks %></td>
+      <td colspan='5' ><button>
+      <%= link_to 'Sort by deadline', tasks_path(sorting_deadline: 'true'), class:'btn btn-info' %>
+</button>
+<button >
+      <%= link_to 'Sort by priority', tasks_path(sorting_priority: 'true'), class:'btn btn-info' %>
+</button></td>
+      </tr>
+    
+  
     
   </tbody>
 </table>
@@ -55,6 +64,6 @@
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
-<%= paginate @tasks %>
+
+
 </div>

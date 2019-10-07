@@ -11,41 +11,59 @@
       </ul>
     </div>
   <% end %>
-
+<table>
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <tr>
+   <td> <%= form.label :title %></td>
+    <td><%= form.text_field :title %></td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= form.label :task_name %>
-    <%= form.text_field :task_name %>
+   <tr> <td><%= form.label :task_name %></td>
+    <td><%= form.text_field :task_name %></td>
+    </tr>
+  </div>
+    <tr>
+  <div class="field">
+    <td><%= form.label :Status %></td>
+    <td><%= form.select :status, ['Not started', 'In progress', 'Done'] %></td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= form.label :Status %>
-    <%= form.select :status, ['Not started', 'In progress', 'Done'] %>
+  <tr>
+    <td><%= form.label :user_id %></td>
+    <td><%= form.number_field :user_id %></td>
+    </tr>
   </div>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
-  </div>
-
-  <div class="field">
+  <tr>
+  <td>
     <%= form.label :priority %>
     <%= form.radio_button :priority, 'low'%>Low 
     <%= form.radio_button :priority, 'medium'%>Medium
     <%= form.radio_button :priority, 'high'%>High 
+    <td>
+    </tr>
   </div>
 
   <div class="field">
-  <%= form.label :deadline %>
-  <%= form.date_field :deadline %>
+  <tr>
+  <td><%= form.label :deadline %></td>
+  <td><%= form.date_field :deadline %></td>
+  </tr>
 </div>
 
   <div class="actions">
-    <%= form.submit %>
+  <tr>
+  <td>
+    <%= form.submit class: "btn btn-info" %>
+    </td>
+    </tr>
   </div>
 <% end %>
+
+
 </div>
