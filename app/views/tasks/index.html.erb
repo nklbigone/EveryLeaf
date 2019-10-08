@@ -1,9 +1,7 @@
-<div style="margin-left: 15%; margin-right: 15%; background-color: AZURE;">
-<%= t('view.sample') %>
+<div >
 <p id="notice"><%= notice %></p>
 <%= search_form_for @search do |f| %>
   <div class="field">
-<h1>Tasks</h1>
 <table class="table table-AZURE">
   <thead>
     <tr>
@@ -45,25 +43,20 @@
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn btn-sm' %></td>
       </tr>
       <% end %>
-      <tr>
-      <td><%= link_to 'New Task', new_task_path %>
-          <%= paginate @tasks %></td>
-      <td colspan='5' ><button>
+      </tbody>
+      </table>
+      
+      <%= link_to 'New Task', new_task_path %>
+      <div class='page'>
+        <%= paginate @tasks %>
+        </div>
+        <div class='align'>
+      <button>
+      
       <%= link_to 'Sort by deadline', tasks_path(sorting_deadline: 'true'), class:'btn btn-info' %>
 </button>
 <button >
       <%= link_to 'Sort by priority', tasks_path(sorting_priority: 'true'), class:'btn btn-info' %>
-</button></td>
-      </tr>
-    
-  
-    
-  </tbody>
-</table>
-<hr>
-
-<br>
-
-
-
+</button>
+   </div>  
 </div>
