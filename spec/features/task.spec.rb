@@ -44,14 +44,14 @@ RSpec.feature "Task management function", type: :feature do
   scenario "Test search by title" do
     visit tasks_path
     fill_in 'title', with: 'title 1'
-    click_button 'search'
+    click_button 'Search'
     expect(page).to have_content 'title 1'
   end
 
   scenario "Test search by status" do
     visit tasks_path
     fill_in 'status', with: 'In progress'
-    click_button 'search'
+    click_button 'Search'
     expect(page).to have_content 'In progress'
   end
 
@@ -59,7 +59,7 @@ RSpec.feature "Task management function", type: :feature do
     visit tasks_path
     fill_in 'title', with: 'title 3'
     fill_in 'status', with: 'Done'
-    click_button 'search'
+    click_button 'Search'
     expect(page).to have_content 'title 3'
     expect(page).to have_content 'Done'
   end
