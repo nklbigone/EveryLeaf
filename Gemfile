@@ -70,3 +70,4 @@ gem "rspec-rails"
   gem "launchy"
   gem "ransack"
   gem "kaminari"
+  gem 'database_cleaner'
