@@ -35,13 +35,6 @@
 
   <div class="field">
   <tr>
-    <td><%= form.label :user_id %></td>
-    <td><%= form.number_field :user_id %></td>
-    </tr>
-  </div>
-
-  <div class="field">
-  <tr>
   <td>
     <%= form.label :priority %>
     <%= form.radio_button :priority, 'low'%>Low 
@@ -57,7 +50,12 @@
   <td><%= form.date_field :deadline %></td>
   </tr>
 </div>
-
+<div class="field">
+  <tr>
+   <td><%= form.hidden_field :user_id, value: current_user.id %></td>
+  </tr>
+</div>
+deadline
   <div class="actions">
   <tr>
   <td>

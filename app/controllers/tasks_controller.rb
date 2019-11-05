@@ -1,5 +1,11 @@
 class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
+    before_action :check_if_loggin
+    def check_if_loggin
+      unless logged_in?
+        redirect_to new_session_path, notice: "To go to this page, you have first login"
+      end
+    end
 
     def index
       @search = Task.ransack(params[:q])
@@ -67,6 +73,6 @@ class TasksController < ApplicationController
       end
       
       def task_params
-        params.require(:task).permit(:title, :task_name, :status, :priority, :user_id, :deadline)
+        params.require(:task).permit(:title, :task_name, :status, :priority, :deadline, :user_id)
       end
 end
