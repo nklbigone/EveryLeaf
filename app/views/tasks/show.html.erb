@@ -16,10 +16,6 @@
   <%= @task.status %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @task.user_id %>
-</p>
 
 <p>
   <strong>priority:</strong>
@@ -28,6 +24,10 @@
 <p>
   <strong>deadline:</strong>
   <%= @task.deadline %>
+</p>
+<p>
+  <strong>deadline:</strong>
+  <%= @task.user.fname %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
