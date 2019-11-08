@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :check_profile]
-  before_action :check_profile, only: [:show]
+  before_action :admin
   # GET /users
   # GET /users.json
   def index
@@ -76,7 +76,11 @@ class UsersController < ApplicationController
       params.require(:user).permit(:fname, :lname, :email, :user_type, :password, :password_confirmation)
     end
 
-    def check_profile
-      
+    def admin
+      if logged_in? 
+        unless current_user.user_type == 'user'
+        redirect_to new_session_path, notice: 'please log in as user'
+        end
+      end
     end
 end
