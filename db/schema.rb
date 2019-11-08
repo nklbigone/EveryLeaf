@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_144421) do
     t.string "fname"
     t.string "lname"
     t.string "email"
+    t.string "user_type", default: "user"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

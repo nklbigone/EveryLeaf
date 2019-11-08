@@ -1,6 +1,6 @@
-class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :check_profile]
-  before_action :check_profile, only: [:show]
+class Admin::UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   # GET /users
   # GET /users.json
   def index
@@ -10,9 +10,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-      unless logged_in? && current_user.id == @user.id
-        redirect_to new_session_path, danger: "Sorry, you are only allowed to view other's profile."
-      end
+    unless logged_in? && current_user.id == @user.id
+      redirect_to new_session_path, danger: "Sorry, you are only allowed to view other's profile."
+    end
   end
 
   # GET /users/new
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         session[:user_id]=@user.id
-        format.html { redirect_to tasks_path, notice: 'User was successfully created.' }
+        format.html { redirect_to new_session_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -75,8 +75,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:fname, :lname, :email, :user_type, :password, :password_confirmation)
     end
+    
 
-    def check_profile
-      
-    end
+
 end
