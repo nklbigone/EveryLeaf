@@ -30,4 +30,25 @@ RSpec.feature "User management function", type: :feature do
     visit admin_users_path
     expect(page ).to  have_content  'alexis'
   end
+  scenario "Test user details" do
+    @user= User.create!(fname: 'ndikumana', lname: 'alexis', email: 'ale@gmail.com', user_type: 'admin', password: 'alexis')
+    visit admin_users_path(id: @user.id)
+    expect(page).to have_content('ale@gmail.com')
+    expect(page).to have_content('admin')
+  end
+  scenario "Test task updating" do
+    @user=User.create!(fname: 'ndikumana', lname: 'alexis', email: 'ale@gmail.com', user_type: 'admin', password: 'alexis')
+    visit users_path
+    visit edit_user_path(id: @user.id)
+    User.update(fname: 'Prince', lname: 'alexis', email: 'ale@gmail.com', user_type: 'admin', password: 'alexis')
+    visit users_path
+    expect(page).to have_content('Profile')
+  end
+  scenario 'Test Task Deletion' do
+    @user= User.create!(fname: 'ndikumana', lname: 'alexis', email: 'ale@gmail.com', user_type: 'admin', password: 'alexis')
+    @user = User.last
+    @user.destroy
+    visit users_path
+    expect(page).not_to have_content('ndikumana')
+  end
 end

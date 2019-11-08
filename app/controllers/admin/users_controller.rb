@@ -1,10 +1,20 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :admin
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    @search = Task.ransack(params[:q])
+      if params[:q]
+        @tasks = @search.result.page(params[:page])
+      elsif params[:sorting_deadline]
+        @tasks = Task.all.order('deadline DESC').page(params[:page])
+      elsif params[:sorting_priority]
+        @tasks = Task.all.order('priority DESC').page(params[:page])
+      else
+        @tasks = Task.all.order('created_at DESC').page(params[:page])
+    end
   end
 
   # GET /users/1
@@ -32,7 +42,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         session[:user_id]=@user.id
-        format.html { redirect_to new_session_path, notice: 'User was successfully created.' }
+        format.html { redirect_to admin_users_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -75,7 +85,12 @@ class Admin::UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:fname, :lname, :email, :user_type, :password, :password_confirmation)
     end
-    
-
+  def admin
+    if logged_in? 
+      unless current_user.user_type == 'admin'
+      redirect_to new_session_path, notice: 'please log in as Admin'
+      end
+    end
+  end
 
 end
