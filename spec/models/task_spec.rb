@@ -14,8 +14,8 @@ RSpec.describe Task, type: :model do
   end
 
   it "validation passes If content is described in title and content" do
-    task = Task.new(title: 'sucess', task_name: 'succeded test')
-    
+    @user = User.create!(fname: "ndikumana",lname: "alexis", email: 'ales@gmail.com',  password: 'alexis')
+    task = Task.new(title: 'sucess', task_name: 'succeded test', user_id: @user.id)
     expect(task).to be_valid
   end
 end
