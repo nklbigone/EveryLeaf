@@ -6,7 +6,10 @@ class TasksController < ApplicationController
         redirect_to new_session_path, notice: "To go to this page, you have first login"
       end
     end
-
+    helper_method :count
+    def count
+      current_user.tasks.count
+    end
     def index
       @search = Task.ransack(params[:q])
       if params[:q]

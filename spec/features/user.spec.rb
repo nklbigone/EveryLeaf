@@ -5,11 +5,29 @@ RSpec.feature "User management function", type: :feature do
    # Task.create!(title: 'Student', content: 'Is a good student')
    # Task.create!(title: 'Accountant', content: 'Balance money')
    background do
-     User.create!(lname: "alexis", email: 'alexis@gmail.com',  password: 'alexis')
+     User.create!(fname: "ndikumana",lname: "alexis", email: 'alexis@gmail.com', user_type: 'admin', password: 'alexis')
      visit  root_path
      fill_in  'Email' ,  with: 'alexis@gmail.com'
      fill_in  'Password' ,  with: 'alexis'
      click_on  'Log in'
    end
-   
+   scenario "Test number of users" do
+    
+    User.create!(fname: 'ndikumana', lname: 'alexis', email: 'ale@gmail.com', user_type: 'admin', password: 'alexis')
+    @user = User.all.count
+    expect(@user).to eq 2
+  end
+  scenario "Test user list" do
+    
+    User.create!(fname: 'ndikumana', lname: 'alexis', email: 'ale@gmail.com', user_type: 'admin', password: 'alexis')
+    visit admin_users_path
+    expect(page ).to  have_content  'alexis'
+    expect(page ).to  have_content  'ndikumana'
+    expect(page ).to  have_content  'admin'
+  end
+  scenario "Test user creation" do
+    User.create!(fname: 'ndikumana', lname: 'alexis', email: 'ale@gmail.com', user_type: 'admin', password: 'alexis')
+    visit admin_users_path
+    expect(page ).to  have_content  'alexis'
+  end
 end
