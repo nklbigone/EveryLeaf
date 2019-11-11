@@ -30,7 +30,7 @@
   <%= @task.user.fname %>
 </p>
 <% if current_user.user_type == 'admin' %>
-<%= link_to 'Back', admin_users_path %>
+<%= link_to 'Back', tasks_path %>
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%else%>
 <%= link_to 'Edit', edit_task_path(@task) %> |

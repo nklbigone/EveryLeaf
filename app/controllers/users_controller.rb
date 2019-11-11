@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :check_profile]
+  before_action :only_see_own_page, only: [:show]
   before_action :admin
   # GET /users
   # GET /users.json
@@ -10,9 +11,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-      unless logged_in? && current_user.id == @user.id
-        redirect_to new_session_path, danger: "Sorry, you are only allowed to view other's profile."
-      end
   end
 
   # GET /users/new
@@ -81,6 +79,13 @@ class UsersController < ApplicationController
         unless current_user.user_type == 'user'
         redirect_to new_session_path, notice: 'please log in as user'
         end
+      end
+    end
+    def only_see_own_page
+      @user = User.find(params[:id])
+  
+      if current_user != @user
+        redirect_to sessions_new_path, notice: "Sorry, but you are only allowed to view your own profile page."
       end
     end
 end
