@@ -7,4 +7,15 @@ class User < ApplicationRecord
   format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true
   before_validation { email.downcase! }
   has_many :tasks, dependent: :destroy
+
+  def self.count_admins
+    @users = User.all
+    @admins=0
+    @users.each do |user|
+      if user.user_type == 'admin'
+        @admins += 1
+      end
+    end
+    return @admins
+  end
 end
