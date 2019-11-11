@@ -47,7 +47,7 @@
       <% end %>
       </tbody>
       </table>
-      
+      <%= link_to 'User show', admin_user_path(current_user.id) %>
       <%= link_to 'New Task', new_task_path %>
       <div class='page'>
         <%= paginate @tasks %>

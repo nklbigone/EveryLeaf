@@ -20,9 +20,6 @@ class Admin::UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    unless logged_in? && current_user.id == @user.id
-      redirect_to new_session_path, danger: "Sorry, you are only allowed to view other's profile."
-    end
   end
 
   # GET /users/new
@@ -85,11 +82,10 @@ class Admin::UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:fname, :lname, :email, :user_type, :password, :password_confirmation)
     end
+
   def admin
-    if logged_in? 
-      unless current_user.user_type == 'admin'
+    unless current_user.user_type == 'admin'
       redirect_to new_session_path, notice: 'please log in as Admin'
-      end
     end
   end
 
