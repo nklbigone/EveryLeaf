@@ -14,6 +14,9 @@ class TasksController < ApplicationController
       @search = Task.ransack(params[:q])
       if params[:q]
         @tasks = @search.result.page(params[:page])
+      elsif params[:search_label]
+        @tasks = Task.joins(:labels)
+            .where("labels.title ILIKE ?", "%#{params[:search_label]}%").page params[:page]
       elsif params[:sorting_deadline]
         @tasks = Task.all.order('deadline DESC').page(params[:page])
       elsif params[:sorting_priority]
@@ -76,6 +79,6 @@ class TasksController < ApplicationController
       end
       
       def task_params
-        params.require(:task).permit(:title, :task_name, :status, :priority, :deadline, :user_id)
+        params.require(:task).permit(:title, :task_name, :status, :priority, :deadline, :user_id, label_ids: [])
       end
 end

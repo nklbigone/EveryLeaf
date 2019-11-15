@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :task_labels
+  resources :labels
   get 'sessions/new'
   resources :users
   root 'tasks#index'
