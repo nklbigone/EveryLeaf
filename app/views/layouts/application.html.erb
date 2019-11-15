@@ -15,13 +15,6 @@
   <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Task 1</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Task 2</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Task 3</a>
-  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"></div>
@@ -31,6 +24,8 @@
 </div>
 <% if logged_in? %>
 <%= link_to "Profile", user_path(current_user.id) %>
+<%= link_to 'Label', labels_path %>
+<%= link_to 'Task', tasks_path %>
 <%= link_to "Logout", session_path(current_user.id), method: :delete %>
 <% else %>
 <%= link_to "Sign up", new_user_path %>

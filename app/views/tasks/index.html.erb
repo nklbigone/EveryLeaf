@@ -1,5 +1,26 @@
 <div >
 <p id="notice"><%= notice %></p>
+<%= form_tag(tasks_path, method: :get,style:'') do %>
+  <%= text_field_tag :search_label, params[:search_label],placeholder:'  Search label'%>
+  <%= submit_tag '  Search', name: nil , class:"btn btn-info rounded-pill"%>
+<% end %>
+<table class = "table table-bordered w-25 ml-5">
+      <thead class="bg-dark text-light">
+        <tr>
+          <th>Labeltitle</th>
+          <th>User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Label.all.each do |label| %>
+          <tr>
+            <td><%= label.title %></td>
+            <td><%= label.user.fname %></td>
+          </tr>
+        <% end %>
+      </tbody>
+</table>
+
 <%= search_form_for @search do |f| %>
   <div class="field">
 <table class="table table-AZURE">
@@ -9,6 +30,8 @@
       <th><%= f.text_field :title_cont %><br></th>
       <th><%= f.label :status_cont ,"Search by status" %><br></th>
       <th><%= f.text_field :status_cont %><br></th>
+          </tr>
+      </tbody>
       <th><div class="actions"><%= f.submit "Search", class: 'btn btn-info'%></div> <% end %></th>
     </tr>
   </thead>
@@ -19,6 +42,7 @@
     <tr>
       <th>Title</th>
       <th>Task</th>
+      <th>Labels</th>
       <th>Status</th>
       <th>Priority</th>
       <th>Deadline</th>
@@ -34,6 +58,14 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.task_name %></td>
+        <td>
+        <% task.labels.each do |label| %>
+          <li>
+          <%= label.title%>
+          </li>
+        <% end %>
+
+        </td>
         <td><%= task.status %></td>
         <td><%= task.priority %></td>
         <td><%= task.deadline %></td>
@@ -47,7 +79,6 @@
       <% end %>
       </tbody>
       </table>
-      <%= link_to 'User show', admin_user_path(current_user.id) %>
       <%= link_to 'New Task', new_task_path %>
       <div class='page'>
         <%= paginate @tasks %>

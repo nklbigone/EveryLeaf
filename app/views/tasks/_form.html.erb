@@ -58,6 +58,17 @@
 deadline
   <div class="actions">
   <tr>
+  <% if logged_in? %>
+    <% Label.all.each do |label| %>
+      <% if current_user.id == label.user_id %>
+        <div class="row ml-4">
+          <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+          <%= form.label:title, label.title %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  </tr>
   <td>
     <%= form.submit class: "btn btn-info" %>
     </td>
@@ -66,6 +77,5 @@ deadline
   </div>
   </table>
 <% end %>
-
 
 </div>
